@@ -1,0 +1,13 @@
+{
+    "appTitle": "AnyPattern",
+    "homeMeasurementProfiles": "Perfiles de Medidas",
+    "homeMeasurementProfilesDesc": "Gestionar las medidas de los usuarios",
+    "homePatternLibrary": "Biblioteca de Patrones",
+    "homePatternLibraryDesc": "Explorar y crear patrones",
+    "homeMyProjects": "Mis Proyectos",
+    "homeMyProjectsDesc": "Ver borradores de patrones guardados",
+    "libraryTitle": "Biblioteca de Patrones",
+    "settingsTitle": "Configuraciones",
+    "measurementsTitle": "Medidas",
+    "projectsTitle": "Proyectos"
+}

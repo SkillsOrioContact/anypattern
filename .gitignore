@@ -1,0 +1,13 @@
+.dart_tool/
+build/
+.pub-cache/
+.pub/
+.packages
+*.log
+anypattern/android/
+anypattern/ios/
+anypattern/linux/
+anypattern/macos/
+anypattern/web/
+anypattern/windows/
+anypattern/.metadata

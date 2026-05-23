@@ -1,0 +1,44 @@
+name: AnyPattern CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        channel: 'stable'
+        flutter-version: '3.22.x' # Using latest stable compatible with Dart 3.4
+
+    - name: Install dependencies
+      working-directory: ./anypattern
+      run: flutter pub get
+
+    - name: Generate files (Isar, Localizations)
+      working-directory: ./anypattern
+      run: dart run build_runner build --delete-conflicting-outputs
+
+    - name: Format
+      working-directory: ./anypattern
+      run: dart format --set-exit-if-changed .
+
+    - name: Analyze
+      working-directory: ./anypattern
+      run: flutter analyze
+
+    - name: Run tests
+      working-directory: ./anypattern
+      run: flutter test
+
+    - name: Build Android APK
+      working-directory: ./anypattern
+      run: flutter build apk --release

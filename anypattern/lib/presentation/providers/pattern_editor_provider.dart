@@ -5,6 +5,11 @@ import '../../data/models/measurement_profile_model.dart';
 import '../../domain/templates/basic_bodice.dart';
 import '../../domain/templates/basic_skirt.dart';
 import '../../domain/templates/basic_trousers.dart';
+import '../../domain/templates/basic_sleeve.dart';
+import '../../domain/templates/basic_collar.dart';
+import '../../domain/templates/basic_hood.dart';
+import '../../domain/templates/shift_dress.dart';
+import '../../domain/templates/kurta.dart';
 
 // Provides a default dummy measurement profile for the MVP preview
 final defaultMeasurementProvider = Provider<MeasurementProfileModel>((ref) {
@@ -21,7 +26,11 @@ final templateRegistryProvider = Provider<Map<String, PatternTemplate>>((ref) {
     'basic_bodice': BasicBodiceTemplate(),
     'basic_skirt': BasicSkirtTemplate(),
     'basic_trousers': BasicTrousersTemplate(),
-    // We can add the others later, keeping it simple for the editor wire-up
+    'basic_sleeve': BasicSleeveTemplate(),
+    'basic_collar': BasicCollarTemplate(),
+    'basic_hood': BasicHoodTemplate(),
+    'shift_dress': ShiftDressTemplate(),
+    'kurta': KurtaTemplate(),
   };
 });
 

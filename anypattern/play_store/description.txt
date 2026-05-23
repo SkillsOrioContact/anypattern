@@ -1,0 +1,17 @@
+Welcome to AnyPattern, the ultimate mobile pattern drafting and garment design platform designed specifically for tailors, fashion students, hobbyists, and boutique owners. AnyPattern allows you to create precise, scalable sewing patterns directly from your Android device, entirely offline!
+
+Say goodbye to manual drafting calculations and complex software. AnyPattern automates pattern geometry based on your custom measurement profiles. Whether you are creating a basic skirt, a tailored bodice, or a traditional Kurta, AnyPattern mathematically scales the template to fit perfectly.
+
+Key Features:
+✂️ Offline-First: Draft patterns, manage measurements, and save projects without needing an internet connection.
+📏 Measurement Profiles: Create unlimited profiles for yourself, clients, or family members. Seamlessly switch between metric and imperial units.
+👗 Extensive Template Library: Access prebuilt templates for Bodices, Skirts, Trousers, Sleeves, Collars, Hoods, Dresses, and Traditional wear.
+📐 Parametric Engine: Input your measurements and watch the drafting engine automatically calculate ease, darts, and curves.
+🖨️ PDF Blueprints: Export your finished drafts directly to a scaled PDF file, ready to print at home (A4) or at a professional plotter. SVG export is also supported!
+🔒 Google Drive Backup: Securely back up your local database to your private Google Drive App Data folder and restore it when changing devices. Your data is yours.
+🤖 AI Assistance (Optional): Provide your own Google Gemini API key to unlock intelligent pattern drafting tips and variations directly within the app.
+
+Pricing:
+AnyPattern is free to use with non-intrusive AdMob ads and provides access to a core set of fundamental pattern templates. To remove ads and unlock our premium templates, you can upgrade via an optional subscription in the app settings.
+
+Transform your fashion ideas into professional sewing templates today with AnyPattern!

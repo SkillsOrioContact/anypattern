@@ -4,6 +4,8 @@ import '../../presentation/screens/home_screen.dart';
 import '../../presentation/screens/pattern_library_screen.dart';
 import '../../presentation/screens/pattern_editor_screen.dart';
 import '../../presentation/screens/settings_screen.dart';
+import '../../presentation/screens/measurement_profiles_screen.dart';
+import '../../presentation/screens/projects_screen.dart';
 
 final goRouter = GoRouter(
   initialLocation: '/',
@@ -28,11 +30,11 @@ final goRouter = GoRouter(
     ),
     GoRoute(
       path: '/measurements',
-      builder: (context, state) => Scaffold(appBar: AppBar(title: const Text('Measurements')), body: const Center(child: Text('Profiles'))),
+      builder: (context, state) => const MeasurementProfilesScreen(),
     ),
     GoRoute(
       path: '/projects',
-      builder: (context, state) => Scaffold(appBar: AppBar(title: const Text('Projects')), body: const Center(child: Text('Saved Projects'))),
+      builder: (context, state) => const ProjectsScreen(),
     ),
   ],
 );

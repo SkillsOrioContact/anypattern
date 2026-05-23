@@ -1,0 +1,9 @@
+Initial Release of AnyPattern!
+
+- Introduced offline-first parametric pattern drafting engine.
+- Create unlimited user measurement profiles.
+- Added templates: Basic Bodice, Skirt, Trousers, Sleeve, Collar, Hood, Shift Dress, and Kurta.
+- Export to PDF with scale check markers.
+- Added secure Google Drive Backup & Restore functionality.
+- Optional AI module integration (bring your own key).
+- English and Spanish localizations included.

@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../providers/pattern_editor_provider.dart';
+import '../../domain/services/subscription_service.dart';
 
-class PatternLibraryScreen extends StatelessWidget {
+class PatternLibraryScreen extends ConsumerWidget {
   const PatternLibraryScreen({super.key});
 
-  final List<Map<String, String>> templates = const [
-    {'id': 'basic_skirt', 'name': 'Basic Skirt', 'category': 'Bottoms'},
-    {'id': 'basic_bodice', 'name': 'Basic Bodice', 'category': 'Tops'},
-    {'id': 'basic_trousers', 'name': 'Basic Trousers', 'category': 'Bottoms'},
-  ];
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final templatesMap = ref.watch(templateRegistryProvider);
+    final templates = templatesMap.values.toList();
+    final isPremium = ref.watch(isPremiumProvider);
+
     return Scaffold(
       appBar: AppBar(title: const Text('Pattern Library')),
       body: GridView.builder(
@@ -25,18 +26,44 @@ class PatternLibraryScreen extends StatelessWidget {
         itemCount: templates.length,
         itemBuilder: (context, index) {
           final t = templates[index];
+
+          // Let's pretend some templates are premium for demonstration
+          final bool isPremiumTemplate = ['shift_dress', 'kurta'].contains(t.id);
+          final bool locked = isPremiumTemplate && !isPremium;
+
           return Card(
+            color: locked ? Colors.grey[200] : null,
             child: InkWell(
               onTap: () {
-                context.push('/editor/${t['id']}');
+                if (locked) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('This is a premium template. Upgrade in settings.')),
+                  );
+                } else {
+                  context.push('/editor/${t.id}');
+                }
               },
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.architecture, size: 48),
+                  Icon(
+                    locked ? Icons.lock : Icons.architecture,
+                    size: 48,
+                    color: locked ? Colors.grey : null
+                  ),
                   const SizedBox(height: 16),
-                  Text(t['name']!, style: Theme.of(context).textTheme.titleMedium),
-                  Text(t['category']!, style: Theme.of(context).textTheme.bodySmall),
+                  Text(
+                    t.name,
+                    style: Theme.of(context).textTheme.titleMedium,
+                    textAlign: TextAlign.center,
+                  ),
+                  Text(
+                    locked ? 'Premium' : 'Free',
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: locked ? Colors.amber[800] : Colors.green,
+                      fontWeight: FontWeight.bold
+                    )
+                  ),
                 ],
               ),
             ),

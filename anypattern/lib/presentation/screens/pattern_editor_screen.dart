@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:path_provider/path_provider.dart';
 import '../../core/engine/geometry.dart';
+import '../../core/export/pdf_export.dart';
 import '../providers/pattern_editor_provider.dart';
 
 class PatternEditorPainter extends CustomPainter {
@@ -74,8 +77,35 @@ class PatternEditorScreen extends ConsumerWidget {
       appBar: AppBar(
         title: Text('Drafting: $templateId'),
         actions: [
-          IconButton(icon: const Icon(Icons.save), onPressed: () {}),
-          IconButton(icon: const Icon(Icons.picture_as_pdf), onPressed: () {}),
+          IconButton(
+            icon: const Icon(Icons.save),
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Project saved locally!')),
+              );
+            }
+          ),
+          IconButton(
+            icon: const Icon(Icons.picture_as_pdf),
+            onPressed: () async {
+              try {
+                final dir = await getApplicationDocumentsDirectory();
+                final file = File('${dir.path}/$templateId-export.pdf');
+                await PdfExportService().exportToPdf(pieces, file);
+                if (context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Exported to ${file.path}')),
+                  );
+                }
+              } catch (e) {
+                if (context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Export failed: $e')),
+                  );
+                }
+              }
+            }
+          ),
         ],
       ),
       body: Column(

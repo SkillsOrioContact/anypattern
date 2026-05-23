@@ -74,14 +74,35 @@ class PatternEditorScreen extends StatelessWidget {
           IconButton(icon: const Icon(Icons.picture_as_pdf), onPressed: () {}),
         ],
       ),
-      body: InteractiveViewer(
-        boundaryMargin: const EdgeInsets.all(double.infinity),
-        minScale: 0.1,
-        maxScale: 10.0,
-        child: CustomPaint(
-          size: Size.infinite,
-          painter: PatternEditorPainter([]), // Currently empty, pieces to be passed here from ViewModel
-        ),
+      body: Column(
+        children: [
+          Container(
+            color: Colors.grey[200],
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                IconButton(icon: const Icon(Icons.pan_tool), onPressed: () {}, tooltip: 'Pan'),
+                IconButton(icon: const Icon(Icons.touch_app), onPressed: () {}, tooltip: 'Select Point'),
+                IconButton(icon: const Icon(Icons.gesture), onPressed: () {}, tooltip: 'Edit Curve'),
+                IconButton(icon: const Icon(Icons.straighten), onPressed: () {}, tooltip: 'Measure'),
+                IconButton(icon: const Icon(Icons.undo), onPressed: () {}, tooltip: 'Undo'),
+                IconButton(icon: const Icon(Icons.redo), onPressed: () {}, tooltip: 'Redo'),
+              ],
+            ),
+          ),
+          Expanded(
+            child: InteractiveViewer(
+              boundaryMargin: const EdgeInsets.all(double.infinity),
+              minScale: 0.1,
+              maxScale: 10.0,
+              child: CustomPaint(
+                size: Size.infinite,
+                painter: PatternEditorPainter([]), // Currently empty, pieces to be passed here from ViewModel
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

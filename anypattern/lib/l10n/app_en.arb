@@ -1,0 +1,13 @@
+{
+    "appTitle": "AnyPattern",
+    "homeMeasurementProfiles": "Measurement Profiles",
+    "homeMeasurementProfilesDesc": "Manage user measurements",
+    "homePatternLibrary": "Pattern Library",
+    "homePatternLibraryDesc": "Browse and draft patterns",
+    "homeMyProjects": "My Projects",
+    "homeMyProjectsDesc": "View saved pattern drafts",
+    "libraryTitle": "Pattern Library",
+    "settingsTitle": "Settings",
+    "measurementsTitle": "Measurements",
+    "projectsTitle": "Projects"
+}

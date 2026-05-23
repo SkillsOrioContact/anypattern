@@ -35,7 +35,10 @@ class PdfExportService {
                       final cmToPoint = 28.3465; // 1 cm is ~28.34 points
 
                       canvas.saveContext();
-                      canvas.translate(size.x / 2, size.y / 2); // center on page
+                      // canvas.translate does not exist on PdfGraphics, we need to transform the points manually
+                      // or use Transform widget, but for custom painter we can add an offset.
+                      final offsetX = size.x / 2;
+                      final offsetY = size.y / 2;
 
                 for (var piece in pieces) {
                   // PdfGraphicsPath does not exist in pdf/widgets.dart pw namespace in this way,
@@ -43,14 +46,14 @@ class PdfExportService {
                   for (int i = 0; i < piece.paths.length; i++) {
                     var segment = piece.paths[i];
                     if (segment is LineSegment) {
-                      if (i == 0) canvas.moveTo(segment.start.x * cmToPoint, segment.start.y * cmToPoint);
-                      canvas.lineTo(segment.end.x * cmToPoint, segment.end.y * cmToPoint);
+                      if (i == 0) canvas.moveTo(offsetX + segment.start.x * cmToPoint, offsetY + segment.start.y * cmToPoint);
+                      canvas.lineTo(offsetX + segment.end.x * cmToPoint, offsetY + segment.end.y * cmToPoint);
                     } else if (segment is BezierCurve) {
-                      if (i == 0) canvas.moveTo(segment.start.x * cmToPoint, segment.start.y * cmToPoint);
+                      if (i == 0) canvas.moveTo(offsetX + segment.start.x * cmToPoint, offsetY + segment.start.y * cmToPoint);
                       canvas.curveTo(
-                        segment.control1.x * cmToPoint, segment.control1.y * cmToPoint,
-                        segment.control2.x * cmToPoint, segment.control2.y * cmToPoint,
-                        segment.end.x * cmToPoint, segment.end.y * cmToPoint,
+                        offsetX + segment.control1.x * cmToPoint, offsetY + segment.control1.y * cmToPoint,
+                        offsetX + segment.control2.x * cmToPoint, offsetY + segment.control2.y * cmToPoint,
+                        offsetX + segment.end.x * cmToPoint, offsetY + segment.end.y * cmToPoint,
                       );
                     }
                   }
@@ -62,8 +65,8 @@ class PdfExportService {
                   // Grain line
                   if (piece.grainLine != null) {
                     canvas.drawLine(
-                      piece.grainLine!.start.x * cmToPoint, piece.grainLine!.start.y * cmToPoint,
-                      piece.grainLine!.end.x * cmToPoint, piece.grainLine!.end.y * cmToPoint
+                      offsetX + piece.grainLine!.start.x * cmToPoint, offsetY + piece.grainLine!.start.y * cmToPoint,
+                      offsetX + piece.grainLine!.end.x * cmToPoint, offsetY + piece.grainLine!.end.y * cmToPoint
                     );
                     canvas.setStrokeColor(PdfColors.blue);
                     canvas.setLineWidth(0.5);

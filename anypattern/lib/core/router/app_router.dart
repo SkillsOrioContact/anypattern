@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import '../../presentation/screens/home_screen.dart';
 import '../../presentation/screens/pattern_library_screen.dart';
 import '../../presentation/screens/pattern_editor_screen.dart';
+import '../../presentation/screens/settings_screen.dart';
 
 final goRouter = GoRouter(
   initialLocation: '/',
@@ -23,7 +24,7 @@ final goRouter = GoRouter(
     ),
     GoRoute(
       path: '/settings',
-      builder: (context, state) => Scaffold(appBar: AppBar(title: const Text('Settings')), body: const Center(child: Text('Settings'))),
+      builder: (context, state) => const SettingsScreen(),
     ),
     GoRoute(
       path: '/measurements',

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/engine/geometry.dart';
+import '../providers/pattern_editor_provider.dart';
 
 class PatternEditorPainter extends CustomPainter {
   final List<PatternPiece> pieces;
@@ -60,12 +62,14 @@ class PatternEditorPainter extends CustomPainter {
   bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }
 
-class PatternEditorScreen extends StatelessWidget {
+class PatternEditorScreen extends ConsumerWidget {
   final String templateId;
   const PatternEditorScreen({super.key, required this.templateId});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final pieces = ref.watch(draftedPiecesProvider(templateId));
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Drafting: $templateId'),
@@ -98,7 +102,7 @@ class PatternEditorScreen extends StatelessWidget {
               maxScale: 10.0,
               child: CustomPaint(
                 size: Size.infinite,
-                painter: PatternEditorPainter([]), // Currently empty, pieces to be passed here from ViewModel
+                painter: PatternEditorPainter(pieces),
               ),
             ),
           ),
